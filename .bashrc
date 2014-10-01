@@ -17,4 +17,4 @@
 # alias cp='cp -i'
 # alias mv='mv -i'
 source /root/.alias
-
+export LANG=C

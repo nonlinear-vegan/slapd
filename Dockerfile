@@ -14,22 +14,26 @@ RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/ss
 
 
 ## set some things for the apache server:
-RUN a2enmod authnz_ldap
+#RUN a2enmod authnz_ldap
 
 ## install openldap
 #ENV LDAP_ROOTPASS apple
 #ENV LDAP_ORGANIZATION mda
 #ENV LDAP_DOMAIN mda.org
-#RUN apt-get update && apt-get install -y slapd apt-utils ldap-utils
+#RUN apt-get update && apt-get install -y slapd  ldap-utils
 #RUN mkdir /etc/service/slapd
 #RUN mdkir /etc/service/slapd/run
 #ADD slapd.sh /etc/service/slapd/run
+
+#RUN apt-get update && apt-get install ca-certificates
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY .vimrc           /root/.vimrc
 COPY .alias           /root/.alias
 COPY .bashrc          /root/.bashrc
 COPY apache2.conf     /etc/apache2/apache2.conf
+#COPY ldap.conf        /etc/ldap/ldap.conf
+#COPY slapd.sh         /root/slapd.sh
 
-EXPOSE 22 80 389
+EXPOSE 22 80 
 CMD ["/usr/bin/supervisord"]
