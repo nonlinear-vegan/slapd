@@ -1,9 +1,13 @@
 ## apache server
 
-FROM debian:wheezy
+FROM  ubuntu:14.04
 
 RUN apt-get update && apt-get install -y openssh-server apache2 supervisor
-RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
+RUN mkdir -p  /var/run/sshd /var/log/supervisor
+
+## get GitLab
+COPY gitlab_7.4.1-omnibus-1_amd64.deb /root/gitlab_7.4.1-omnibus-1_amd64.deb
+#RUN wget https://downloads-packages.s3.amazonaws.com/debian-7.6/gitlab_7.4.1-omnibus-1_amd64.deb
 
 ## some other things I like to have:
 RUN apt-get update && apt-get install -y vim
@@ -27,13 +31,19 @@ RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/ss
 
 #RUN apt-get update && apt-get install ca-certificates
 
+## some more gitlab stuff:
+RUN cd /root && dpkg -i gitlab_7.4.1-omnibus-1_amd64.deb
+
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY .vimrc           /root/.vimrc
 COPY .alias           /root/.alias
 COPY .bashrc          /root/.bashrc
-COPY apache2.conf     /etc/apache2/apache2.conf
-#COPY ldap.conf        /etc/ldap/ldap.conf
-#COPY slapd.sh         /root/slapd.sh
+
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+## configuration for gitlab:
+COPY gitlab.rb      /etc/gitlab/gitlab.rb
+
 
 EXPOSE 22 80 
 CMD ["/usr/bin/supervisord"]
