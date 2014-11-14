@@ -32,8 +32,6 @@ COPY .vimrc           /root/.vimrc
 COPY .alias           /root/.alias
 COPY .bashrc          /root/.bashrc
 
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-
 
 EXPOSE 22 80 
 
@@ -71,6 +69,15 @@ RUN chown -R couchdb:couchdb \
   /usr/local/var/lib/couchdb /usr/local/var/log/couchdb /usr/local/var/run/couchdb
 
 
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log/apache2
+## setup for apache server...has LDAP configs and proxy pass
+COPY apache2.conf     /etc/apache2/apache2.conf
+
+
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+
 
 CMD ["/usr/bin/supervisord"]
