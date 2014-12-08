@@ -1,3 +1,2 @@
-alias cpush="couchapp push /home/marymissmary/fjord/fjorddocker fjord"
 alias ls="ls --color=auto"
 

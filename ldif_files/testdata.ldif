@@ -1,0 +1,21 @@
+dn: ou=People,dc=ldaptest,dc=local
+objectClass: organizationalUnit
+ou: People
+
+dn: uid=anniethorisdottir,ou=People,dc=ldaptest,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: anniethorisdottir
+sn: Thorisdottir
+givenName: Annie
+cn: Annie Thorisdottir
+displayName: Annie Thorisdottir
+uidNumber: 10001
+gidNumber: 5001
+userPassword: anniethorisdottir
+gecos: Annie Thorisdottir
+loginShell: /bin/bash
+homeDirectory: /home/anniethorisdottir
+
+

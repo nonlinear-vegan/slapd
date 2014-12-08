@@ -1,0 +1,18 @@
+
+dn: uid=richfroning,ou=People,dc=ldaptest,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: richfroning
+sn: Froning
+givenName: Rich
+cn: Rich Froning
+displayName: Rich Froning
+uidNumber: 10001
+gidNumber: 5001
+userPassword: richfroning
+gecos: Rich Froning
+loginShell: /bin/bash
+homeDirectory: /home/richfroning
+
+
