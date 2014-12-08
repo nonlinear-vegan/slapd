@@ -1,5 +1,7 @@
 # Dockerized Standalone LDAP Daemon run with supervisor.
 
+I find I sometimes need a test instance of LDAP to test applications I'm making, so I built a simple docker container running slapd.
+
 Container includes vim and apache2 just for kicks, and sshd to log in update the LDAP database (you can also update from outside the container).
 
 Yes, I know, sshd in a container is considered poor form,
